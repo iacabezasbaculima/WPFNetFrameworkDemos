@@ -1,0 +1,15 @@
+﻿<Window x:Class="TerraFormingWPF.ButtonDemo"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+Title="ButtonDemo" Height="253.081" Width="493.365" WindowState="Normal">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="WPF Button Design" Foreground="Blue" FontSize="20" FontWeight="Bold" Margin="10,0,0,0"/>
+        <StackPanel Orientation="Horizontal" Margin="10">
+
+            <Button Content="Blue" Width="100" Style="{StaticResource btnBlue}" HorizontalAlignment="Left"/>
+            <Button Content="Green" Width="100" Style="{StaticResource btnGreen}" HorizontalAlignment="Left"/>
+            <Button Content="Gray" Width="100" Style="{StaticResource btnGray}" HorizontalAlignment="Left"/>
+            <Button Content="Light Coral" Width="100" Style="{StaticResource btnLightRed}" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

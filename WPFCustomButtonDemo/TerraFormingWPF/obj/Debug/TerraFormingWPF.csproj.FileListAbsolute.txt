@@ -1,0 +1,14 @@
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\bin\Debug\TerraFormingWPF.exe.config
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\bin\Debug\TerraFormingWPF.exe
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\bin\Debug\TerraFormingWPF.pdb
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.csprojAssemblyReference.cache
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\ButtonDemo.baml
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\App.baml
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\ButtonDemo.g.cs
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\App.g.cs
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF_MarkupCompile.cache
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.g.resources
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.Properties.Resources.resources
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.csproj.GenerateResource.cache
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.exe
+C:\Users\Isaac Baculima\source\repos\test\TerraFormingWPF\obj\Debug\TerraFormingWPF.pdb
