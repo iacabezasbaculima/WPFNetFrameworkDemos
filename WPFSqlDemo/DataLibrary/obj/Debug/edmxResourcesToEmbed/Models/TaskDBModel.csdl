@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TasksDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tasks" Relationship="Self.CategoryId" FromRole="Categories" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Done" Type="Boolean" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="0" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.CategoryId" FromRole="Tasks" ToRole="Categories" />
+    <NavigationProperty Name="User" Relationship="Self.UserId" FromRole="Tasks" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tasks" Relationship="Self.UserId" FromRole="Users" ToRole="Tasks" />
+  </EntityType>
+  <Association Name="CategoryId">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserId">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TasksDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="CategoryId" Association="Self.CategoryId">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="UserId" Association="Self.UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

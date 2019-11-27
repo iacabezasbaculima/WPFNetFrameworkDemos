@@ -1,0 +1,6 @@
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\bin\Debug\WPFAppDB.dacpac
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\bin\Debug\WPFAppDB.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\bin\Debug\WPFAppDB.pdb
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\obj\Debug\WPFAppDB.sqlprojAssemblyReference.cache
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\obj\Debug\WPFAppDB.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\WPFAppDB\obj\Debug\WPFAppDB.pdb

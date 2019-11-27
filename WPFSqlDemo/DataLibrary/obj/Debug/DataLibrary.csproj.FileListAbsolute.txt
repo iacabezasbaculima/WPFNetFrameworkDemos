@@ -1,0 +1,11 @@
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\DataLibrary.dll.config
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\DataLibrary.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\DataLibrary.pdb
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\EntityFramework.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\EntityFramework.xml
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\obj\Debug\DataLibrary.csprojAssemblyReference.cache
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\obj\Debug\DataLibrary.csproj.CopyComplete
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\obj\Debug\DataLibrary.dll
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFSqlDemo\DataLibrary\obj\Debug\DataLibrary.pdb
