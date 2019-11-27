@@ -12,3 +12,17 @@ C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.Prope
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.csproj.GenerateResource.cache
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.exe
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.pdb
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug\WPFApp.exe.config
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug\WPFApp.exe
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug\WPFApp.pdb
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.csprojAssemblyReference.cache
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\MainWindow.g.cs
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\App.g.cs
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp_MarkupCompile.cache
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp_MarkupCompile.lref
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\MainWindow.baml
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.g.resources
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.Properties.Resources.resources
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.csproj.GenerateResource.cache
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.exe
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.pdb

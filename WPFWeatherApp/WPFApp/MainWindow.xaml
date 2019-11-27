@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="300" Width="300"
+        KeyDown="OnKeyDown">
     <Border>
         <StackPanel>
-            <StackPanel x:Name="CityListPanel" Visibility="Collapsed">
+            <StackPanel x:Name="CityListPanel" Visibility="Visible">
                 <!--#region -->
                 <Grid Background="#6200EE">
                     <Grid.ColumnDefinitions>
@@ -20,13 +22,22 @@
                     <Button Margin="10 5" Grid.Column="1">Add</Button>
                     <Button Margin="10 5" Grid.Column="2">Remove</Button>
                 </Grid>
+                <TextBlock>Please type a city name and press ENTER:</TextBlock>
+                <TextBox x:Name="tbx_Input" Padding="1.5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="103*"/>
+                        <ColumnDefinition Width="189*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="lv_cities" Grid.ColumnSpan="2">
 
-                <Grid x:Name="LocationList">
+                    </ListView>
                 </Grid>
+
                 <!--#endregion-->
             </StackPanel>
 
-            <StackPanel x:Name="ForecastPanel">
+            <StackPanel x:Name="ForecastPanel" Visibility="Collapsed">
                 <Grid Background="#6200EE">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -39,14 +50,14 @@
                 <TextBlock x:Name="Date" FontSize="10" TextAlignment="Center">Wed, 27 November</TextBlock>
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2.8*"/>
+                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="Temp" Grid.Column="0" FontSize="100" TextAlignment="Center" >21&#186;C</TextBlock>
                     <StackPanel Grid.Column="1">
                         <TextBlock x:Name="MaxTemp" FontSize="50">25</TextBlock>
                         <TextBlock x:Name="MinTemp" FontSize="50">12</TextBlock>
-                        <TextBlock x:Name="WindSpeed" FontSize="12" TextAlignment="Center">234 mps</TextBlock>
+                        <TextBlock x:Name="WindSpeed" FontSize="12" FontWeight="DemiBold" TextAlignment="Center">234 mps</TextBlock>
                     </StackPanel>
                 </Grid>
             </StackPanel>

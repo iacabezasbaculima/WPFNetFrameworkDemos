@@ -8,3 +8,9 @@ C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WeatherDB\obj\Debug\postdeplo
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WeatherDB\obj\Debug\predeploy.sql
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.dll
 C:\Users\Isaac Baculima\source\repos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.pdb
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\bin\Debug\WeatherDB.dacpac
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\bin\Debug\WeatherDB.dll
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\bin\Debug\WeatherDB.pdb
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.sqlprojAssemblyReference.cache
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.dll
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.pdb
