@@ -15,7 +15,9 @@ using System.Windows.Shapes;
 using WPFApp.Models;
 using WPFApp.Services.OpenWeather;
 using System.Diagnostics;
-using System.Collections.ObjectModel;
+using WPFApp.Entities;
+using System.IO;
+using System.Reflection;
 
 namespace WPFApp
 {
@@ -24,23 +26,41 @@ namespace WPFApp
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		List<WeatherForecast> forecast { get; set; }
-		List<string> cityList { get; set; }
-		WeatherForecast currentWeather;
-		OpenWeatherMapService service;
-		Task _API_CALL;
-
-		//ObservableCollection<string> mySource { get; set; }
-
+		private List<WeatherForecast> forecast { get; set; }
+		private List<Location> cityList { get; set; }
+		private WeatherForecast currentWeather;
+		private OpenWeatherMapService service;
+		private Task _API_CALL;
+		public string iconFolderPath = @"C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\WeatherIcons\";
 		public MainWindow()
 		{
 			InitializeComponent();
-			cityList = new List<string>();
+			cityList = new List<Location>();
 			forecast = new List<WeatherForecast>();
 			service = new OpenWeatherMapService();
+			tbx_Input.Focus();
 
+			using (var db = new WeatherEntities())
+			{
+				cityList = db.Locations.ToList();
+			}
+			// Set the ListView source, i.e. collection
+			lv_cities.ItemsSource = cityList;
+			lv_cities.DisplayMemberPath = "City";
+			ForecastPanel.Visibility = Visibility.Collapsed;
+			CityListPanel.Visibility = Visibility.Visible;
+			#region DIR TEST
+				// C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug
+				// WPFApp folder dir
+				//string directory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+				// The path of all weather icon files
+				//var icons = Directory.GetFiles(directory + "\\WeatherIcons\\");
+				//Trace.WriteLine("Directory: "+ directory);
+				//Trace.WriteLine("Icons dir: " + icons[0] + " | "+icons[1]);
+				//WeatherIcon.Source = new BitmapImage(new Uri(@"C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\WeatherIcons\01d@2x.png"));
+			#endregion
 		}
-	
+
 		public async Task GetWeather(string location, OpenWeatherMapService.QueryType type)
 		{
 			try
@@ -57,18 +77,39 @@ namespace WPFApp
 						forecast = weather.Skip(1).Take(2).ToList();
 						break;
 				}
-
+				Trace.WriteLine("FIRST");
 				//Update UI element now
 				CityName.Text = currentWeather.City;
+				WeatherIcon.Source = new BitmapImage(new Uri($"{iconFolderPath}{currentWeather.ImageId}@2x.png"));
 				Description.Text = currentWeather.Description.First().ToString().ToUpper() + currentWeather.Description.Substring(1);
 				Date.Text = currentWeather.Date.ToString("MM/dd/yyyy");
-				Temp.Text = $"{Math.Round(currentWeather.CurrentTemperature).ToString()}{"\u00B0"}{"C"}";
-				MaxTemp.Text = Math.Round(currentWeather.MaxTemperature).ToString();
-				MinTemp.Text = Math.Round(currentWeather.MinTemperature).ToString();
+				Temp.Text = $"{Math.Round(currentWeather.CurrentTemperature).ToString()}";
+				MaxTemp.Text = $"{Math.Round(currentWeather.MaxTemperature).ToString()}{"\u00B0"}";
+				MinTemp.Text = $"{Math.Round(currentWeather.MinTemperature).ToString()}{"\u00B0"}";
 				WindSpeed.Text = $"{currentWeather.WindSpeed.ToString()} m/s";
 				Humidity.Text = $"{currentWeather.Humidity} %";
 				Pressure.Text = $"{currentWeather.Pressure} hPa";
 
+				var inputCity = new Location { City = location };
+				// Check if a city already exists in the list before we add it 
+				bool check = cityList.Any(i => i.City == inputCity.City);
+
+				if (!check)
+				{
+					using (var db = new WeatherEntities())
+					{
+						db.Locations.Add(inputCity);
+						db.SaveChanges();
+						lv_cities.ItemsSource = null;
+						cityList.Add(inputCity);
+						lv_cities.ItemsSource = cityList;
+						lv_cities.DisplayMemberPath = "City";
+					}
+				} 
+
+				Trace.WriteLine("Success.");
+
+				// Swap Panels
 				CityListPanel.Visibility = Visibility.Collapsed;
 				ForecastPanel.Visibility = Visibility.Visible;
 			}
@@ -82,6 +123,9 @@ namespace WPFApp
 		{
 			ForecastPanel.Visibility = Visibility.Collapsed;
 			CityListPanel.Visibility = Visibility.Visible;
+
+			tbx_Input.Text = "";	// clear textbox content
+			tbx_Input.Focus();		// set cursor in textbox
 		}
 
 		private void OnKeyDown(object sender, KeyEventArgs e)
@@ -92,26 +136,24 @@ namespace WPFApp
 				{
 					if (tbx_Input.Text != string.Empty)
 					{
-						var city = tbx_Input.Text;
-						cityList.Add(city);
-
-						//lv_cities.ItemsSource = cityList;
-						lv_cities.Items.Add(city);
 						// Get Data
-						_API_CALL = GetWeather(city, OpenWeatherMapService.QueryType.SINGLE_DAY);
+						_API_CALL = GetWeather(tbx_Input.Text, OpenWeatherMapService.QueryType.SINGLE_DAY);
 					}
 				}
 			}
 		}
 
-		private void tbx_Input_QueryCursor(object sender, QueryCursorEventArgs e)
+		private void lv_cities_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			MessageBox.Show("hello");
-		}
+			Location city = (Location)lv_cities.SelectedItem;
 
-		private void tbx_Input_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-		{
-			MessageBox.Show("hello");
+			if (city != null)
+			{
+				if (city.City != string.Empty)
+				{
+					_API_CALL = GetWeather(city.City, OpenWeatherMapService.QueryType.SINGLE_DAY);
+				}
+			}
 
 		}
 	}

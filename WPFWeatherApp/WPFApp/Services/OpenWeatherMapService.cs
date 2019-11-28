@@ -80,14 +80,19 @@ namespace WPFApp.Services.OpenWeather
 					WeatherForecast forecast = new WeatherForecast
 					{
 						City = x.Element("city").Attribute("name").Value,
+						Country = x.Element("city").Element("country").Value,
 						Date = DateTime.Parse(x.Element("lastupdate").Attribute("value").Value),
-						Description = x.Element("clouds").Attribute("name").Value,
+						SunSet = DateTime.Parse(x.Element("city").Element("sun").Attribute("set").Value),
+						SunRise = DateTime.Parse(x.Element("city").Element("sun").Attribute("rise").Value),
+						Description = x.Element("weather").Attribute("value").Value,
 						CurrentTemperature = double.Parse(x.Element("temperature").Attribute("value").Value),
 						MaxTemperature = double.Parse(x.Element("temperature").Attribute("max").Value),
 						MinTemperature = double.Parse(x.Element("temperature").Attribute("min").Value),
 						WindSpeed = double.Parse(x.Element("wind").Element("speed").Attribute("value").Value),
 						Humidity = int.Parse(x.Element("humidity").Attribute("value").Value),
 						Pressure = int.Parse(x.Element("pressure").Attribute("value").Value),
+						IconId = int.Parse(x.Element("weather").Attribute("number").Value),
+						ImageId = x.Element("weather").Attribute("icon").Value
 					};
 					return forecast;
 				default:
