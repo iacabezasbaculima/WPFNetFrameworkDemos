@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300"
+        Title="MainWindow" Height="320" Width="300"
         KeyDown="OnKeyDown">
     <Border>
         <StackPanel>
@@ -57,7 +56,26 @@
                     <StackPanel Grid.Column="1">
                         <TextBlock x:Name="MaxTemp" FontSize="50">25</TextBlock>
                         <TextBlock x:Name="MinTemp" FontSize="50">12</TextBlock>
-                        <TextBlock x:Name="WindSpeed" FontSize="12" FontWeight="DemiBold" TextAlignment="Center">234 mps</TextBlock>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Margin="0 5 0 0" x:Name="Description" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center">Description</TextBlock>
+                <Grid Margin="0 15 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="DemiBold">Humidity</TextBlock>
+                        <TextBlock x:Name="Humidity" HorizontalAlignment="Center">45 %</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock FontWeight="DemiBold" HorizontalAlignment="Center" >Pressure</TextBlock>
+                        <TextBlock x:Name="Pressure" HorizontalAlignment="Center">1013 hPa</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock FontWeight="DemiBold" HorizontalAlignment="Center">Wind Speed</TextBlock>
+                        <TextBlock x:Name="WindSpeed" HorizontalAlignment="Center">234 m/s</TextBlock>
                     </StackPanel>
                 </Grid>
             </StackPanel>

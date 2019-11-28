@@ -85,7 +85,9 @@ namespace WPFApp.Services.OpenWeather
 						CurrentTemperature = double.Parse(x.Element("temperature").Attribute("value").Value),
 						MaxTemperature = double.Parse(x.Element("temperature").Attribute("max").Value),
 						MinTemperature = double.Parse(x.Element("temperature").Attribute("min").Value),
-						WindSpeed = double.Parse(x.Element("wind").Element("speed").Attribute("value").Value)
+						WindSpeed = double.Parse(x.Element("wind").Element("speed").Attribute("value").Value),
+						Humidity = int.Parse(x.Element("humidity").Attribute("value").Value),
+						Pressure = int.Parse(x.Element("pressure").Attribute("value").Value),
 					};
 					return forecast;
 				default:

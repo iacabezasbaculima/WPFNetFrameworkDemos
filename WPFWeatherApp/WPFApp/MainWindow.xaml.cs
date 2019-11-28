@@ -57,14 +57,17 @@ namespace WPFApp
 						forecast = weather.Skip(1).Take(2).ToList();
 						break;
 				}
-				
+
 				//Update UI element now
 				CityName.Text = currentWeather.City;
+				Description.Text = currentWeather.Description.First().ToString().ToUpper() + currentWeather.Description.Substring(1);
 				Date.Text = currentWeather.Date.ToString("MM/dd/yyyy");
 				Temp.Text = $"{Math.Round(currentWeather.CurrentTemperature).ToString()}{"\u00B0"}{"C"}";
 				MaxTemp.Text = Math.Round(currentWeather.MaxTemperature).ToString();
 				MinTemp.Text = Math.Round(currentWeather.MinTemperature).ToString();
 				WindSpeed.Text = $"{currentWeather.WindSpeed.ToString()} m/s";
+				Humidity.Text = $"{currentWeather.Humidity} %";
+				Pressure.Text = $"{currentWeather.Pressure} hPa";
 
 				CityListPanel.Visibility = Visibility.Collapsed;
 				ForecastPanel.Visibility = Visibility.Visible;
@@ -94,7 +97,6 @@ namespace WPFApp
 
 						//lv_cities.ItemsSource = cityList;
 						lv_cities.Items.Add(city);
-
 						// Get Data
 						_API_CALL = GetWeather(city, OpenWeatherMapService.QueryType.SINGLE_DAY);
 					}
