@@ -29,9 +29,7 @@ namespace WPFApp.Services.OpenWeather
 			if (location == string.Empty) throw new ArgumentException("Location can't be an empty string.");
 
 			var query = $"forecast?q={location}&type=accurate&units=metric&mode=xml&appid={_APP_KEY}";
-			
-			//var query = $"forecast/daily?q={location}&type=accurate&mode=xml&units=metric&cnt={days}&appid={_APP_KEY}";
-			//var query = $"forecast?q={location},us&mode=xml&appid=b6907d289e10d714a6e88b30761fae22";
+		
 			var response = await _client.GetAsync(query);
 
 			switch (response.StatusCode)
@@ -46,12 +44,19 @@ namespace WPFApp.Services.OpenWeather
 					
 						var data = x.Descendants("time").Select(w => new WeatherForecast
 						{
-							Date = DateTime.Parse(w.Attribute("from").Value.Substring(0, 10)),
+							City = w.Parent.Parent.Element("location").Element("name").Value,
+							Country = w.Parent.Parent.Element("location").Element("country").Value,
+							Date = DateTime.Parse(w.Attribute("from").Value),
+							SunSet = DateTime.Parse(w.Parent.Parent.Element("sun").Attribute("set").Value.Substring(11,8)),
+							SunRise = DateTime.Parse(w.Parent.Parent.Element("sun").Attribute("rise").Value.Substring(11,8)),
 							Description = w.Element("symbol").Attribute("name").Value,
+							ImageId = w.Element("symbol").Attribute("var").Value,
 							WindSpeed = double.Parse(w.Element("windSpeed").Attribute("mps").Value),
 							CurrentTemperature = double.Parse(w.Element("temperature").Attribute("value").Value),
 							MaxTemperature = double.Parse(w.Element("temperature").Attribute("max").Value),
 							MinTemperature = double.Parse(w.Element("temperature").Attribute("min").Value),
+							Pressure = int.Parse(w.Element("pressure").Attribute("value").Value),
+							Humidity = int.Parse(w.Element("humidity").Attribute("value").Value)
 						});
 						return data;
 				default:

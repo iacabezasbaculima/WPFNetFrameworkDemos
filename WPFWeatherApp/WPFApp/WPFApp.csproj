@@ -85,6 +85,7 @@
     <Compile Include="Models\WeatherForecast.cs" />
     <Compile Include="Models\WeatherIcon.cs" />
     <Compile Include="Services\OpenWeatherMapService.cs" />
+    <Compile Include="Utils\TimeOfDay.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,6 +147,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="WeatherIcons\list2.png" />
+    <Resource Include="WeatherIcons\list.png" />
     <Resource Include="WeatherIcons\01d%402x.png" />
     <Resource Include="WeatherIcons\01n%402x.png" />
     <Resource Include="WeatherIcons\02d%402x.png" />

@@ -17,7 +17,7 @@ using WPFApp.Services.OpenWeather;
 using System.Diagnostics;
 using WPFApp.Entities;
 using System.IO;
-using System.Reflection;
+using WPFApp.Utils;
 
 namespace WPFApp
 {
@@ -29,9 +29,13 @@ namespace WPFApp
 		private List<WeatherForecast> forecast { get; set; }
 		private List<Location> cityList { get; set; }
 		private WeatherForecast currentWeather;
+		private WeatherForecast wTomorrow;
+		private WeatherForecast wAfterTomorrow;
 		private OpenWeatherMapService service;
 		private Task _API_CALL;
-		public string iconFolderPath = @"C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\WeatherIcons\";
+		private string _iconFolderPath;
+		private static OpenWeatherMapService.QueryType _searchFor = OpenWeatherMapService.QueryType.FIVE_DAYS;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -49,23 +53,21 @@ namespace WPFApp
 			lv_cities.DisplayMemberPath = "City";
 			ForecastPanel.Visibility = Visibility.Collapsed;
 			CityListPanel.Visibility = Visibility.Visible;
-			#region DIR TEST
-				// C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug
-				// WPFApp folder dir
-				//string directory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
-				// The path of all weather icon files
-				//var icons = Directory.GetFiles(directory + "\\WeatherIcons\\");
-				//Trace.WriteLine("Directory: "+ directory);
-				//Trace.WriteLine("Icons dir: " + icons[0] + " | "+icons[1]);
-				//WeatherIcon.Source = new BitmapImage(new Uri(@"C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\WeatherIcons\01d@2x.png"));
-			#endregion
+			
+			// Get app root folder path
+			var appFolder = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+			// Set path of WeatherIcons
+			_iconFolderPath = $"{appFolder}{"\\WeatherIcons\\"}";
 		}
 
-		public async Task GetWeather(string location, OpenWeatherMapService.QueryType type)
+		public async Task GetWeather(string location)
 		{
 			try
 			{
-				switch (type)
+				#region Get and Filter Weather Data
+				double maxtemp;
+				double mintemp;
+				switch (_searchFor)
 				{
 					case OpenWeatherMapService.QueryType.SINGLE_DAY:
 						currentWeather = await service.GetSingleForecastAsync(location);
@@ -74,13 +76,31 @@ namespace WPFApp
 					case OpenWeatherMapService.QueryType.FIVE_DAYS:
 						var weather = await service.GetForecastAsync(location);
 						currentWeather = weather.First();
-						forecast = weather.Skip(1).Take(2).ToList();
+						
+						maxtemp = weather.Where(i => i.Date.Day == TimeOfDay.Tomorrow.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.Midday.TimeOfDay).First().CurrentTemperature;
+						mintemp = weather.Where(i => i.Date.Day == TimeOfDay.Tomorrow.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.NinePM.TimeOfDay).First().CurrentTemperature;
+						wTomorrow = weather.Where(i => i.Date.Day == TimeOfDay.Tomorrow.Day).FirstOrDefault();
+						wTomorrow.MaxTemperature = maxtemp > mintemp ? Math.Round(maxtemp) : Math.Round(mintemp);
+						wTomorrow.MinTemperature = mintemp < maxtemp ? Math.Round(mintemp) : Math.Round(maxtemp);
+
+						maxtemp = weather.Where(i => i.Date.Day == TimeOfDay.AfterTomorrow.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.Midday.TimeOfDay).First().CurrentTemperature;
+						mintemp = weather.Where(i => i.Date.Day == TimeOfDay.AfterTomorrow.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.NinePM.TimeOfDay).First().CurrentTemperature;
+						wAfterTomorrow = weather.Where(i => i.Date.Day == TimeOfDay.AfterTomorrow.Day).First();
+						wTomorrow.MaxTemperature = maxtemp > mintemp ? Math.Round(maxtemp) : Math.Round(mintemp);
+						wTomorrow.MinTemperature = mintemp < maxtemp ? Math.Round(mintemp) : Math.Round(maxtemp);
+
+						maxtemp = weather.Where(i => i.Date.Day == TimeOfDay.Today.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.Midday.TimeOfDay).First().CurrentTemperature;
+						mintemp = weather.Where(i => i.Date.Day == TimeOfDay.Today.Day).Where(i => i.Date.TimeOfDay == TimeOfDay.NinePM.TimeOfDay).First().CurrentTemperature;
+						currentWeather = weather.Where(i => i.Date.Day == TimeOfDay.Today.Day).First();
+						currentWeather.MaxTemperature = maxtemp > mintemp ? Math.Round(maxtemp) : Math.Round(mintemp);
+						currentWeather.MinTemperature = mintemp < maxtemp ? Math.Round(mintemp) : Math.Round(maxtemp);
 						break;
 				}
-				Trace.WriteLine("FIRST");
-				//Update UI element now
+				#endregion
+
+				#region Update UI
 				CityName.Text = currentWeather.City;
-				WeatherIcon.Source = new BitmapImage(new Uri($"{iconFolderPath}{currentWeather.ImageId}@2x.png"));
+				WeatherIcon.Source = new BitmapImage(new Uri($"{_iconFolderPath}{currentWeather.ImageId}@2x.png"));
 				Description.Text = currentWeather.Description.First().ToString().ToUpper() + currentWeather.Description.Substring(1);
 				Date.Text = currentWeather.Date.ToString("MM/dd/yyyy");
 				Temp.Text = $"{Math.Round(currentWeather.CurrentTemperature).ToString()}";
@@ -90,10 +110,24 @@ namespace WPFApp
 				Humidity.Text = $"{currentWeather.Humidity} %";
 				Pressure.Text = $"{currentWeather.Pressure} hPa";
 
+				// Tomorrow UI
+				TomorrowDay.Text = wTomorrow.Date.DayOfWeek.ToString().Substring(0,3);
+				TomorrowDate.Text = wTomorrow.Date.ToString("dd/MM");
+				TomorrowTemp.Text = $"{Math.Round(wTomorrow.MaxTemperature).ToString()} / {Math.Round(wTomorrow.MinTemperature).ToString()}";
+				TomorrowIcon.Source = new BitmapImage(new Uri($"{_iconFolderPath}{wTomorrow.ImageId}@2x.png"));
+				// AfterTomorrow UI
+				AfterTomorrowDay.Text = wAfterTomorrow.Date.DayOfWeek.ToString().Substring(0, 3);
+				AfterTomorrowDate.Text = wAfterTomorrow.Date.ToString("dd/MM");
+				AfterTomorrowTemp.Text = $"{Math.Round(wAfterTomorrow.MaxTemperature).ToString()} / {Math.Round(wAfterTomorrow.MinTemperature).ToString()}";
+				AfterTomorrowIcon.Source = new BitmapImage(new Uri($"{_iconFolderPath}{wAfterTomorrow.ImageId}@2x.png"));
+
 				var inputCity = new Location { City = location };
 				// Check if a city already exists in the list before we add it 
 				bool check = cityList.Any(i => i.City == inputCity.City);
 
+				#endregion
+
+				#region Adding City To Database
 				if (!check)
 				{
 					using (var db = new WeatherEntities())
@@ -106,12 +140,12 @@ namespace WPFApp
 						lv_cities.DisplayMemberPath = "City";
 					}
 				} 
+				#endregion
 
-				Trace.WriteLine("Success.");
-
-				// Swap Panels
+				#region Swap Panels
 				CityListPanel.Visibility = Visibility.Collapsed;
 				ForecastPanel.Visibility = Visibility.Visible;
+				#endregion
 			}
 			catch (Exception ex)
 			{
@@ -137,7 +171,7 @@ namespace WPFApp
 					if (tbx_Input.Text != string.Empty)
 					{
 						// Get Data
-						_API_CALL = GetWeather(tbx_Input.Text, OpenWeatherMapService.QueryType.SINGLE_DAY);
+						_API_CALL = GetWeather(tbx_Input.Text);
 					}
 				}
 			}
@@ -151,7 +185,7 @@ namespace WPFApp
 			{
 				if (city.City != string.Empty)
 				{
-					_API_CALL = GetWeather(city.City, OpenWeatherMapService.QueryType.SINGLE_DAY);
+					_API_CALL = GetWeather(city.City);
 				}
 			}
 
