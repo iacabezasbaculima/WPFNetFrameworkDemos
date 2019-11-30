@@ -65,5 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish Profiles\WeatherDB.publish.xml" />
+    <None Include="Publish Profiles\aws-db-weather.publish.publish.xml" />
   </ItemGroup>
 </Project>

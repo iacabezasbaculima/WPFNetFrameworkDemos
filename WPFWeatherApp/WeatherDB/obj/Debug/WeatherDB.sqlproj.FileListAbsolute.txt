@@ -20,3 +20,7 @@ C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WeatherD
 C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.sqlprojAssemblyReference.cache
 C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.dll
 C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\WeatherDB.pdb
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\Model.xml
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\refactor.xml
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\postdeploy.sql
+A:\WPFNetFrameworkDemos\WPFWeatherApp\WeatherDB\obj\Debug\predeploy.sql
