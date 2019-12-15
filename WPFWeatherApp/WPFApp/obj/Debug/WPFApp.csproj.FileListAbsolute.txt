@@ -53,3 +53,4 @@ A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\bin\Debug\EntityFramework.SqlServer
 A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp_Content.g.cs
 A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\WPFApp.csproj.CopyComplete
 A:\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\App.baml
+C:\Users\Isaac Baculima\source\repos\WPFNetFrameworkDemos\WPFWeatherApp\WPFApp\obj\Debug\App.baml
